@@ -10,6 +10,9 @@ import Home from './components/Home/Home';
 import ListedBooks from './components/ListedBooks/ListedBooks';
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import PagesRead from "./components/PagesRead/PagesRead";
+import BookCard from "./components/BookCard/BookCard";
+import { loader } from "react";
+
 
 const router = createBrowserRouter([
   {
@@ -23,7 +26,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/listed',
-        element: <ListedBooks></ListedBooks>
+        element: <ListedBooks></ListedBooks>,
+      },
+      {
+        path: '/home/:bookId',
+        element: <BookCard></BookCard>,
+        loader: () => fetch('books.json')
       },
       {
         path: '/pages',

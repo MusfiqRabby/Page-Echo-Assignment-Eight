@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
    
    const links = <>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/listed">Listed Books</NavLink></li>
-    <li><NavLink to="/pages">Pages to Read</NavLink></li>
-    <li><NavLink to="/info">InfoHub</NavLink></li>
-    <li><NavLink to="/explore">Explore</NavLink></li>
+    <li><NavLink to="/" className={({isActive}) => isActive? 'text-[#23BE0A] font-bold': 'font-bold' }>Home</NavLink></li>
+    <li><NavLink to="/listed" className={({isActive}) => isActive? 'text-[#23BE0A] font-bold': 'font-bold' }>Listed Books</NavLink></li>
+    <li><NavLink to="/pages" className={({isActive}) => isActive? 'text-[#23BE0A] font-bold': 'font-bold' }>Pages to Read</NavLink></li>
+    <li><NavLink to="/info" className={({isActive}) => isActive? 'text-[#23BE0A] font-bold': 'font-bold' }>InfoHub</NavLink></li>
+    <li><NavLink to="/explore" className={({isActive}) => isActive? 'text-[#23BE0A] font-bold': 'font-bold' }>Explore</NavLink></li>
     
    </>
    
