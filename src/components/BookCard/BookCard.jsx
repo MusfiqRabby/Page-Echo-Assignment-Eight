@@ -33,12 +33,10 @@ const BookCard = () => {
             <span className="font-bold ">Review:</span> {book.review}
           </h4>
           <div>
-           
             {
                 books.map(idx => <div key={idx}>tag</div>)
             }
 
-            
           </div>
           <hr />
           <div className="flex gap-8 mt-2">

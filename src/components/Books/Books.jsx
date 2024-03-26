@@ -27,5 +27,3 @@ const Books = () => {
 };
 
 export default Books;
-
-// https://i.ibb.co/12ncJ3b/top-view-pile-books.jpg
