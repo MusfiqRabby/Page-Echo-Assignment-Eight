@@ -13,7 +13,6 @@ const Book = ({ book }) => {
         <img
           className="w-[300px] h-[180px] p-3 rounded-lg"
           src={image}
-          alt="Shoes"
         />
       </figure>
       <div className="flex gap-10 ml-10 mt-5 text-[#23BE0A] text-sm font-medium">

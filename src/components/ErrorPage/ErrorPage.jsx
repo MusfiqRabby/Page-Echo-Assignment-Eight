@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 const ErrorPage = () => {
     return (
         <div>
-            <h1>Not Found Page</h1>
-            <Link to="/">Go back to home</Link>
+            <div className="text-center my-48">
+               <h1 className="text-lime-600 text-xl font-bold my-2">Oops!!</h1> 
+                <h4 className="text-2xl font-bold my-2">Not Found Page</h4>
+               <button className="btn"><Link to="/">Go back</Link></button>
+            </div>
         </div>
     );
 };
