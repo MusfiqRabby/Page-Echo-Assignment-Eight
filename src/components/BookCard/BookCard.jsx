@@ -8,12 +8,18 @@ const BookCard = () => {
   const { bookId } = useParams();
   const bookIdInt = parseInt(bookId);
   const book = books.find((book) => book.bookId == bookIdInt);
-//    console.log(book);
+// console.log(book);
 
   const handleApplyBook = () =>{
     saveApplyBook(bookIdInt)
     toast('Books Added to Read List')
   }
+
+  const handleApplyWishList = () =>{
+    saveApplyBook(bookIdInt)
+    toast('Books Added to wish List')
+  }
+
 
   return (
     <div>
@@ -33,9 +39,9 @@ const BookCard = () => {
             <span className="font-bold ">Review:</span> {book.review}
           </h4>
           <div>
-            {
-                books.map(idx => <div key={idx}>tag</div>)
-            }
+          <div>
+             <p className="font-medium">tag: {book.tags.map(idx => <span className="text-[#23BE0A] mr-4">#{idx}</span>)}</p>
+          </div>
 
           </div>
           <hr />
@@ -57,7 +63,11 @@ const BookCard = () => {
             <button
             onClick={handleApplyBook}
             class="btn mr-4 hover:bg-[#23BE0A]">Read</button>
-            <button class="btn bg-[#50B1C9]">Wishlist</button>
+
+            {/* uporer function gula repeat korte hobe */}
+
+            <button onClick={handleApplyWishList}
+             class="btn bg-[#50B1C9]">Wishlist</button>
           </div>
         </div>
       </div>

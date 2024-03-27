@@ -1,6 +1,5 @@
 import Banner from "../Banner/Banner";
 import Books from "../Books/Books";
-import PagesRead from '../PagesRead/PagesRead';
 
 const Home = () => {
     return (
