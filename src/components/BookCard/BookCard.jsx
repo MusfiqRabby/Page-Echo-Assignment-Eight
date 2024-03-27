@@ -23,7 +23,7 @@ const BookCard = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-2 lg:gap-10">
         <div>
           <img src={book.image} alt="" />
         </div>

@@ -5,7 +5,7 @@ import { getStoredBook } from '../../utility/LoacalStorage';
 import { useLoaderData } from 'react-router-dom';
 
 
-const colors = ['#0088FE', '#00C49F'];
+const colors = ['#0088FE', '#00C49F', '#FFBB28'];
 const data = [
   {
     name: 'Page A',
@@ -67,6 +67,7 @@ const PagesRead = () => {
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="bookName" />
     <YAxis />
+    <Tooltip />
     <Bar dataKey="totalPages" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
       {
       chartData.map((entry, index) => (
