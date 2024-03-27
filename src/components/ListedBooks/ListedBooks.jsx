@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import { getStoredBook } from "../../utility/LoacalStorage";
+import { getStoredBook, getWishdBook } from "../../utility/LoacalStorage";
 import { MdOutlineRequestPage } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 
 const ListedBooks = () => {
-  
-const [tabIndex, setTabIndex] = useState(0);
-  
- const books = useLoaderData();
-  const [appliedBooks, setAppliedBooks] = useState([]);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [Wishlist, setWishList] = useState([]);
+  const books = useLoaderData();
+  // const [appliedBooks, setAppliedBooks] = useState([]);
+
+  const [displayBooks, setDisplayBooks] = useState([]);
+  // sortbyhadler
+  // const handleSortBy = filter =>{
+  //   if(filter === 'Rating'){
+  //     const ratingBooks = appliedBooks.filter(book => book.rating === '4.6')
+  //     setDisplayBooks(ratingBooks)
+  //   }
+  //   else if(filter === 'Number of pages'){
+  //     const pages = appliedBooks.filter(book => book.totalPages === '279')
+  //     setDisplayBooks(pages);
+  //   }
+  //   else if(filter === 'Publisher year'){
+  //     const publisherYear = appliedBooks.filter(book => book.yearOfPublishing === '1813')
+  //     setDisplayBooks(publisherYear)
+  //   }
+  // }
 
   useEffect(() => {
     const storedBooksIds = getStoredBook();
+    const getishdBook = getWishdBook();
 
     const booksApplied = [];
     for (const bookId of storedBooksIds) {
@@ -22,15 +39,25 @@ const [tabIndex, setTabIndex] = useState(0);
         booksApplied.push(book);
       }
     }
+    const wish = [];
+    for (const bookId of getishdBook) {
+      const book = books.find((book) => book.bookId == bookId);
+      if (book) {
+        wish.push(book);
+      }
+    }
+    // setAppliedBooks(booksApplied);
 
-    setAppliedBooks(booksApplied);
-
+    setDisplayBooks(booksApplied);
+    setWishList(wish);
   }, []);
+
+  const showBooks = tabIndex === 0 ? displayBooks : Wishlist;
 
   return (
     <div>
       <div className="bg-gray-200 my-7 text-[#131313] text-3xl rounded-lg font-bold">
-        <h1 className="text-center items-center py-6 ">Books</h1>
+        <h1 className="text-center items-center py-4 ">Books</h1>
       </div>
 
       <div className="text-center items-center my-4">
@@ -52,11 +79,12 @@ const [tabIndex, setTabIndex] = useState(0);
 
       <div>
         <div className="flex -mx-4 overflow-x-auto overflow-y-hidden  flex-nowrap dark:bg-gray-100 dark:text-gray-800 my-4">
-
-          <Link 
-             to=''
+          <Link
+            to=""
             onClick={() => setTabIndex(0)}
-            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tabIndex === 0? 'border border-b-0': 'border-b'} rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
+            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${
+              tabIndex === 0 ? "border border-b-0" : "border-b"
+            } rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +100,12 @@ const [tabIndex, setTabIndex] = useState(0);
             </svg>
             <span>Read Books</span>
           </Link>
-          <Link 
-           onClick={() => setTabIndex(1)}
-          to=""
-            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tabIndex ===1? 'border border-b-0': 'border-b'} rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
+          <Link
+            onClick={() => setTabIndex(1)}
+            to=""
+            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${
+              tabIndex === 1 ? "border border-b-0" : "border-b"
+            } rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,67 +126,72 @@ const [tabIndex, setTabIndex] = useState(0);
       </div>
       <div>
         {
-             appliedBooks.map((book) => (
-          <div className="card card-side gap-4 bg-base-100 my-4 shadow-xl ">
-            <img
-              className="w-[300px] h-[180px] p-3 rounded-lg"
-              src={book.image}
-            />
-            <div className="">
-              <h2 className="card-title">{book.bookName}</h2>
-              <p className="font-bold">by : {book.author}</p>
-             
-              <div>
-                <div className="flex ">
-                   <div className="flex gap-3 ">
-                 
-                    <div>
-                       <p className="font-medium">tag: {book.tags.map(idx => <span className="text-[#23BE0A] mr-2">#{idx}</span>)}</p>
-                     </div>
-                  
-                   </div>
+          // appliedBooks
+          showBooks.map((book) => (
+            <div className="card card-side gap-4 bg-base-100 my-4 shadow-xl ">
+              <img
+                className="w-[300px] h-[180px] p-3 rounded-lg"
+                src={book.image}
+              />
+              <div className="">
+                <h2 className="card-title">{book.bookName}</h2>
+                <p className="font-bold">by : {book.author}</p>
 
-                   <div className="flex gap-1 items-center ml-6">
-                   <p><CiLocationOn/></p>
-                    <span >year of publishing : {book.yearOfPublishing}</span>
-                   </div>
-                </div>
-
-              </div>
-              
-              <div className="flex gap-7 mb-4">
-                <div className="flex items-center gap-2">
-                  <p>
-                    <FaUserFriends />
-                  </p>
-                  <span className="opacity-80 ">
-                    Publisher : {book.publisher}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <p className="item-center ">
-                    <MdOutlineRequestPage />
-                  </p>
-                  <span className="opacity-80">{book.totalPages}</span>
-                </div>
-              </div>
-              <hr />
-              <div className="flex my-3 gap-6">
-                <div className="bg-[#328EFF4D] text-[#328EFF] rounded-full ">
-                  <h3 className="p-2">category : {book.category}</h3>
-                </div>
-                <div className="bg-[#FFAC334D] text-[#FFAC33] rounded-full">
-                  <h5 className="p-2 items-center">Rating: {book.rating}</h5>
-                </div>
                 <div>
-                  <button className="btn btn-active bg-[#23BE0A] text-white rounded-full">
-                    View Details
-                  </button>
+                  <div className="flex ">
+                    <div className="flex gap-3 ">
+                      <div>
+                        <p className="font-medium">
+                          {/* tag:{" "} */}
+                          {book.tags.map((idx) => (
+                            <span className="text-[#23BE0A] mr-2">#{idx}</span>
+                          ))}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-1 items-center ml-6">
+                      <p>
+                        <CiLocationOn />
+                      </p>
+                      <span>year of publishing : {book.yearOfPublishing}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-7 mb-4">
+                  <div className="flex items-center gap-2">
+                    <p>
+                      <FaUserFriends />
+                    </p>
+                    <span className="opacity-80 ">
+                      Publisher : {book.publisher}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <p className="item-center ">
+                      <MdOutlineRequestPage />
+                    </p>
+                    <span className="opacity-80">{book.totalPages}</span>
+                  </div>
+                </div>
+                <hr />
+                <div className="flex my-3 gap-6">
+                  <div className="bg-[#328EFF4D] text-[#328EFF] rounded-full ">
+                    <h3 className="p-2">category : {book.category}</h3>
+                  </div>
+                  <div className="bg-[#FFAC334D] text-[#FFAC33] rounded-full">
+                    <h5 className="p-2 items-center">Rating: {book.rating}</h5>
+                  </div>
+                  <div>
+                    <button className="btn btn-active bg-[#23BE0A] text-white rounded-full">
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
+          ))
         }
       </div>
     </div>

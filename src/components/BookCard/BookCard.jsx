@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { saveApplyBook } from "../../utility/LoacalStorage";
+import { saveApplyBook, saveApplyWish } from "../../utility/LoacalStorage";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,6 +9,8 @@ const BookCard = () => {
   const bookIdInt = parseInt(bookId);
   const book = books.find((book) => book.bookId == bookIdInt);
 // console.log(book);
+  
+
 
   const handleApplyBook = () =>{
     saveApplyBook(bookIdInt)
@@ -16,14 +18,14 @@ const BookCard = () => {
   }
 
   const handleApplyWishList = () =>{
-    saveApplyBook(bookIdInt)
+    saveApplyWish(bookIdInt)
     toast('Books Added to wish List')
   }
 
 
   return (
     <div>
-      <div className="grid grid-cols-2 lg:gap-10">
+      <div className="grid grid-cols-2 gap-10">
         <div>
           <img src={book.image} alt="" />
         </div>
@@ -46,12 +48,14 @@ const BookCard = () => {
           </div>
           <hr />
           <div className="flex gap-8 mt-2">
+            
             <div>
               <p className="opacity-80 mb-1">Number of Pages:</p>
               <p className="opacity-80 mb-1">Publisher: </p>
               <p className="opacity-80 mb-1">Year of Publishing:</p>
               <p className="opacity-80 mb-1">Rating:</p>
             </div>
+            
             <div>
               <p className="font-bold mb-1">{book.totalPages}</p>
               <p className="font-bold mb-1">{book.publisher}</p>
