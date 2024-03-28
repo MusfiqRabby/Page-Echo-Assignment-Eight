@@ -9,24 +9,8 @@ const ListedBooks = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [Wishlist, setWishList] = useState([]);
   const books = useLoaderData();
-  // const [appliedBooks, setAppliedBooks] = useState([]);
 
   const [displayBooks, setDisplayBooks] = useState([]);
-  // sortbyhadler
-  // const handleSortBy = filter =>{
-  //   if(filter === 'Rating'){
-  //     const ratingBooks = appliedBooks.filter(book => book.rating === '4.6')
-  //     setDisplayBooks(ratingBooks)
-  //   }
-  //   else if(filter === 'Number of pages'){
-  //     const pages = appliedBooks.filter(book => book.totalPages === '279')
-  //     setDisplayBooks(pages);
-  //   }
-  //   else if(filter === 'Publisher year'){
-  //     const publisherYear = appliedBooks.filter(book => book.yearOfPublishing === '1813')
-  //     setDisplayBooks(publisherYear)
-  //   }
-  // }
 
   useEffect(() => {
     const storedBooksIds = getStoredBook();
@@ -46,8 +30,6 @@ const ListedBooks = () => {
         wish.push(book);
       }
     }
-    // setAppliedBooks(booksApplied);
-
     setDisplayBooks(booksApplied);
     setWishList(wish);
   }, []);
@@ -64,6 +46,8 @@ const ListedBooks = () => {
         <details className="dropdown">
           <summary className=" btn bg-[#23EB0A] text-white">Sort By</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+
+         
             <li>
               <a>Rating</a>
             </li>
@@ -76,7 +60,6 @@ const ListedBooks = () => {
           </ul>
         </details>
       </div>
-
       <div>
         <div className="flex -mx-4 overflow-x-auto overflow-y-hidden  flex-nowrap dark:bg-gray-100 dark:text-gray-800 my-4">
           <Link
@@ -126,7 +109,7 @@ const ListedBooks = () => {
       </div>
       <div>
         {
-          // appliedBooks
+
           showBooks.map((book) => (
             <div className="card card-side gap-4 bg-base-100 my-4 shadow-xl ">
               <img

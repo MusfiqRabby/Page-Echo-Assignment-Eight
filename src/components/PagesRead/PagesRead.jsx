@@ -5,21 +5,7 @@ import { getStoredBook } from '../../utility/LoacalStorage';
 import { useLoaderData } from 'react-router-dom';
 
 
-const colors = ['#0088FE', '#00C49F', '#FFBB28'];
-const data = [
-  {
-    name: 'Page A',
-    uv: 3000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 2000,
-    pv: 1398,
-    amt: 2210,
-  },
-];
+const colors = ['#0088FE', '#00C49F', '#FFBB28', 'pink', 'red', '#FF8042'];
 
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}

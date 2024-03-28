@@ -8,9 +8,6 @@ const BookCard = () => {
   const { bookId } = useParams();
   const bookIdInt = parseInt(bookId);
   const book = books.find((book) => book.bookId == bookIdInt);
-// console.log(book);
-  
-
 
   const handleApplyBook = () =>{
     saveApplyBook(bookIdInt)
