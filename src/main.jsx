@@ -12,7 +12,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import PagesRead from "./components/PagesRead/PagesRead";
 import BookCard from "./components/BookCard/BookCard";
 import { loader } from "react";
-import Info from './components/Info/Info';
+
 
 
 const router = createBrowserRouter([
@@ -40,10 +40,6 @@ const router = createBrowserRouter([
         element: <PagesRead></PagesRead>,
         loader: () => fetch('/books.json')
       },
-      {
-        path: '/InfoHub',
-        element: <Info></Info>
-      }
     ]
   },
 ]);
